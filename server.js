@@ -25,6 +25,16 @@ var server = http.createServer( function(req, res){
 			        res.write(html);  
 			        res.end();  
 			});
+		} else if (req.url == "/recently"){
+			res.writeHead(200, {"Contetn-type":"text/html"});
+
+			fs.readFile('./recently.html', function (err, html) {
+			    if (err) {
+			        throw err; 
+			    }
+			        res.write(html);  
+			        res.end();  
+			});
 		} else if (error){
 			res.writeHead(404, {"Contetn-type":"text/plain"});
 			res.end("Sorry the page was not found");
