@@ -30,31 +30,18 @@
 				format: "json"
 			},
 			success: function(data) {
-				
-				var temp=data;
-				console.log(data);
-				for(var i = 0; i<5; ++i){
-					var towrite = document.getElementsByTagName('ul')[0].innerHTML += "<li><img src=\""+temp.items[i].media.m+"\" alt /></li>";
-					towrite = '<!DOCTYPE html><html><body><ul>' + towrite + '</ul></body></html>';
-				};
-				for(var i = 0; i<5; ++i){
-					tosend += temp.items[i].media.m + "\n";
-				};
-
 				$.ajax({
-					url: 'http://127.0.0.1:1337/request',
-					//data: tosend,
-					data: {
-						first:tosend,
-						second:towrite
-					},
+					url: '/save',
+					data: data,
 					type: 'POST',
+					dataType:'json',
+					contentType: "application/json",
 					jsonpCallback: 'callback', // this is not relevant to the POST anymore
 					success: function (data) {
 						console.log('Success: ')
 					},
 					error: function (xhr, status, error) {
-						console.log('Error: ' + error.message);
+						console.log('Error: ' + error);
 					},
 				});
 			},
